@@ -1,15 +1,17 @@
 from application import db
 
-class Task(db.Model):
+class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
     onupdate=db.func.current_timestamp())
 
     name = db.Column(db.String(144), nullable=False)
-    done = db.Column(db.Boolean, nullable=False)
+    amount = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False)
 
-    def __init__(self, name):
+    def __init__(self, name, amount, price):
         self.name = name
-        self.done = False
+        self.amount = amount
+        self.price = price 
 
