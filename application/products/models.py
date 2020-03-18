@@ -7,7 +7,7 @@ class Product(db.Model):
     onupdate=db.func.current_timestamp())
 
     name = db.Column(db.String(144), nullable=False)
-    amount = db.Column(db.Integer, nullable=False)
+    amount = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
 
     def __init__(self, name, amount, price):

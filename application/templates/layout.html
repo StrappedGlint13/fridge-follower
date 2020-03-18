@@ -6,6 +6,10 @@
   </head>
 
   <body>
+      <ul>
+	<li><a href="{{ url_for('products_list') }}">List products</a></li>
+	<li><a href="{{ url_for('products_form') }}">Add a product</a></li>
+      </ul>
     {% block body %}
       <p>
         Content.
