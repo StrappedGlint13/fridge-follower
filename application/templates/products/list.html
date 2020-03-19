@@ -4,14 +4,20 @@
   <table>
     <tr>
       <th>Product</th>
-      <th>Amount</th>
-      <th>Price</th>
+      <th>Amount (g/ml)</th>
+      <th>Price (€)</th>
     </tr>
     {% for product in products %}
     <tr>
       <td>{{ product.name }}</td>
       <td>{{ product.amount }}</td>
       <td>{{ product.price }}</td>
+      <td>
+	<form method="POST" action="{{ url_for('change_amount', product_id=product.id) }}">
+          <input type="text" name="amount"/>
+	  <input type="submit" value="Change amount"/>
+	</form>
+      </td>
     </tr>
     {% endfor %}
   </table>

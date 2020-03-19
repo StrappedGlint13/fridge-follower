@@ -10,9 +10,18 @@ def products_list():
 def products_form():
     return render_template("products/new.html")
 
+@app.route("/tasks/<product_id>/", methods=["POST"])
+def change_amount(product_id):
+
+    t = Product.query.get(product_id)
+    t.amount = request.form.get("amount")  
+    db.session().commit()
+  
+    return redirect(url_for("products_list"))
+
 
 @app.route("/products/", methods=["POST"])
-def products_create():
+def products_create(): 
     product = Product(request.form.get("name"), request.form.get("amount"), request.form.get("price"))
 
     db.session().add(product)

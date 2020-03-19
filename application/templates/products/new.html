@@ -1,10 +1,37 @@
 {% extends "layout.html" %}
-  
+
 {% block body %}
 <form method="POST" action="{{ url_for('products_create') }}">
-  <input type="text" name="name"/>
-  <input type="text" name="amount"/>
-  <input type="text" name="price"/>
-  <input type="submit" value="Add a new product"/>
+<h2>
+New Product
+</h2>
+ <table>
+    <tr>
+      <td>
+	 Name
+         <input type="text" name="name"/>
+      </td>
+    </tr>
+   <tr>
+      <td>
+	 Amount
+         <input type="text" name="amount"/>
+	 g/ml
+      </td>
+    </tr>  
+   <tr>
+      <td>
+	 Price 
+         <input type="text" name="price"/>
+         €
+      </td>
+    </tr> 
+   <tr>
+      <td>
+ 	<div>
+	</div>
+         <input type="submit" value="Add a new product"/>
+      </td>
+    </tr> 
 </form>
 {% endblock %}
