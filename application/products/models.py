@@ -10,6 +10,9 @@ class Product(db.Model):
     amount = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
 
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
+                           nullable=False)
+
     def __init__(self, name, amount, price):
         self.name = name
         self.amount = amount 

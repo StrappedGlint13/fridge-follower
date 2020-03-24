@@ -8,25 +8,30 @@ New Product
  <table>
     <tr>
       <td>
-	 Name
-         <input type="text" name="name"/>
+	{{ form.name.label }}
+      </td>
+      <td>
+	{{ form.name }}
       </td>
     </tr>
    <tr>
       <td>
-	 Amount
-         <input type="text" name="amount"/>
+	{{ form.amount.label }}
+      </td>
+      <td>
+	{{ form.amount }}
       </td>
     </tr>  
    <tr>
       <td>
-	 Price 
-         <input type="text" name="price"/>
+	{{ form.price.label }}
+      </td>
+      <td>
+	{{ form.price }}
       </td>
     </tr> 
    <tr>
-      
-      <td>
+      <td colspan="2">
          <input type="submit" value="Add a new product"/>
       </td>
     </tr> 
