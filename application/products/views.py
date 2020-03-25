@@ -31,9 +31,10 @@ def products_create():
     form = ProductForm(request.form)
 	
     if not form.validate():
-        return render_template("tasks/new.html", form = form)
+        return render_template("products/new.html", form = form)
 
     product = Product(request.form.get("name"), request.form.get("amount"), request.form.get("price"))
+
     product.account_id = current_user.id
 
 

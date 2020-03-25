@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <title>MyFridge-Follower</title>
   </head>
-
-  <body>
     <body>
       {% if current_user.is_authenticated %}
       <p>
@@ -14,6 +12,7 @@
       {% else %}
       <a href="{{ url_for('auth_login') }}">Sign in</a>
       {% endif %}
+      <p> <a href="{{ url_for('account_create') }}">New user?</a></p>
       <ul>
 	<li><a href="{{ url_for('products_list') }}">List products</a></li>
 	<li><a href="{{ url_for('products_form') }}">Add a product</a></li>

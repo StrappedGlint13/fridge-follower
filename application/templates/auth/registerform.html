@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{{ error }}
+<form method="POST" action="{{ url_for('account_create') }}">
+<p> Fill the fields </p>
+  <table>
+    <tr>
+      <td>
+        {{ form.name.label }}
+      </td>
+      <td>
+        {{ form.name }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.username.label }}
+      </td>
+      <td>
+        {{ form.username }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.password.label }}
+      </td>
+      <td>
+        {{ form.password }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.email.label }}
+      </td>
+      <td>
+        {{ form.email }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="Create a Fridge"/>
+      </td>
+    </tr>
+</form>
+{% endblock %}
+
+
+
