@@ -12,6 +12,13 @@
       <td>
         {{ form.name }}
       </td>
+      <td>
+       <ul>
+	 {% for error in form.name.errors %}
+	 <li>{{ error }}</li>
+	 {% endfor %}
+       </ul>
+      </td>
     </tr>
     <tr>
       <td>
@@ -19,6 +26,13 @@
       </td>
       <td>
         {{ form.username }}
+      </td>
+      <td>
+       <ul>
+	 {% for error in form.username.errors %}
+	 <li>{{ error }}</li>
+	 {% endfor %}
+       </ul>
       </td>
     </tr>
     <tr>
@@ -28,6 +42,13 @@
       <td>
         {{ form.password }}
       </td>
+      <td>
+       <ul>
+	 {% for error in form.password.errors %}
+	 <li>{{ error }}</li>
+	 {% endfor %}
+       </ul>
+      </td>
     </tr>
     <tr>
       <td>
@@ -36,9 +57,16 @@
       <td>
         {{ form.email }}
       </td>
+      <td>
+       <ul>
+	 {% for error in form.email.errors %}
+	 <li>{{ error }}</li>
+	 {% endfor %}
+       </ul>
+      </td>
     </tr>
     <tr>
-      <td colspan="2">
+      <td colspan="3">
         <input type="submit" value="Create a Fridge"/>
       </td>
     </tr>

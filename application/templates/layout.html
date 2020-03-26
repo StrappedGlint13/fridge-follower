@@ -7,7 +7,7 @@
     <body>
       {% if current_user.is_authenticated %}
       <p>
-	MyFridge: {{ current_user.name }}. <a href="{{ url_for('auth_logout') }}">Sign out</a>
+	MyFridge: {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Sign out</a>
       </p>
       {% else %}
       <a href="{{ url_for('auth_login') }}">Sign in</a>

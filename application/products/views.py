@@ -6,6 +6,7 @@ from application.products.models import Product
 from application.products.forms import ProductForm
 
 @app.route("/products", methods=["GET"])
+@login_required
 def products_list():
     return render_template("products/list.html", products = Product.query.all())
 
@@ -14,7 +15,7 @@ def products_list():
 def products_form():
     return render_template("products/new.html", form = ProductForm())
 
-@app.route("/tasks/<product_id>/", methods=["POST"])
+@app.route("/update/<product_id>/", methods=["POST"])
 @login_required
 def change_amount(product_id):
 
@@ -39,6 +40,17 @@ def products_create():
 
 
     db.session().add(product)
+    db.session().commit()
+  
+    return redirect(url_for("products_list"))
+
+@app.route("/products/<product_id>/", methods=["POST"])
+@login_required
+def products_delete(product_id): 
+    product = Product.query.get(product_id)
+	
+
+    db.session().delete(product)
     db.session().commit()
   
     return redirect(url_for("products_list"))

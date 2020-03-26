@@ -29,11 +29,11 @@ def auth_logout():
     logout_user()
     return redirect(url_for("index"))  
 
-@app.route("/auth/", methods=["POST"])
+@app.route("/auth/", methods=["GET", "POST"])
 def account_create(): 
     form = RegisterForm(request.form)
 
-    if not form.validate():
+    if not form.validate():   
         return render_template("auth/registerform.html", form = form)
 
     user = User(request.form.get("name"), request.form.get("username"), request.form.get("password"), request.form.get("email"))

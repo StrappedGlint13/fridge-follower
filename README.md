@@ -14,7 +14,10 @@ The main features of the app are:
 - make a dish with the products from the fridge. This will update your contents of the fridge.   
 - explore your own dish history or history of all fridge users. 
 
-[Here](https://my-fridge-follower.herokuapp.com/) you can start tracking your fridge. 
+[Here](https://my-fridge-follower.herokuapp.com/) you can start tracking your fridge. Before making a new user, you are able to test the application  with following test IDs:
+
+Username: test
+Password: 12345678 
 
 ## Documentation 
 
