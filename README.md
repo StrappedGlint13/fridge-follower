@@ -17,9 +17,11 @@ The main features of the app are:
 [Here](https://my-fridge-follower.herokuapp.com/) you can start tracking your fridge. Before making a new user, you are able to test the application  with following test IDs:
 
 Username: test
+
 Password: 12345678 
 
 ## Documentation 
 
 [Database diagram](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/Images/MyFridge-Follower.png)
+
 [User Stories](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/user_stories.md)
