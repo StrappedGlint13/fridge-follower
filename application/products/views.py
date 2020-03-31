@@ -8,14 +8,14 @@ from application.products.forms import ProductForm
 @app.route("/products", methods=["GET"])
 @login_required
 def products_list():
-    return render_template("products/list.html", products = Product.query.all())
+    return render_template("products/list.html", products=Product.find_users_products())
 
 @app.route("/products/new/")
 @login_required
 def products_form():
     return render_template("products/new.html", form = ProductForm())
 
-@app.route("/products/<product_id>/", methods=["POST"])
+@app.route("/products/<product_id>", methods=["POST","GET"])
 @login_required
 def change_amount(product_id):
 
