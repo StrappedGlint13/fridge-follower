@@ -9,14 +9,20 @@
     </tr>
     {% for product in products %}
     <tr>
-      <td>{{ product.name }}</td>
-      <td>{{ product.amount }}</td>
-      <td>{{ product.price }}</td>
+      <td> {{ product.name }} </td>
+      <td> {{ product.amount }} </td>
+      <td> {{ product.price }} </td>
       <td>
 	<form method="POST" action="{{ url_for('change_amount', product_id=product.id) }}">
           <input type="text" name="amount"/>
 	  <input type="submit" value="Change amount"/>
 	</form>
+      </td>
+      <td>
+  <form method="POST" action="{{ url_for('throw_waste', product_id=product.id) }}">
+          <input type="text" name="waste"/>
+    <input type="submit" value="Throw away"/>
+  </form>
       </td>
       <td>
 	<form method="POST" action="{{ url_for('products_delete', product_id=product.id) }}">

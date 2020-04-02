@@ -3,7 +3,7 @@ from application.models import Base
 from flask_login import current_user
 from sqlalchemy.sql import text
 
-class Product(Base):
+class Waste(Base):
 
     name = db.Column(db.String(144), nullable=False)
     amount = db.Column(db.Float, nullable=False)
@@ -17,17 +17,3 @@ class Product(Base):
         self.amount = amount 
         self.price = price 
  
-    @staticmethod
-    def find_users_products():
-        stmt = text("SELECT * FROM Product"
-                    " JOIN Account ON Product.account_id = Account.id"
-                    " WHERE Product.account_id = :account_id"
-		    " ORDER BY Product.price ASC").params(account_id=current_user.id)
-
-        res = db.engine.execute(stmt)
-  
-        response = []
-        for row in res:
-            response.append({"id": row[0], "name":row[3], "amount":row[4], "price":row[5]})
-
-        return response
