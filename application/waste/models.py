@@ -16,4 +16,19 @@ class Waste(Base):
         self.name = name
         self.amount = amount 
         self.price = price 
+
+    @staticmethod
+    def find_personal_waste():
+        stmt = text("SELECT * FROM Waste"
+                    " JOIN Account ON Waste.account_id = Account.id"
+                    " WHERE Waste.account_id = :account_id"
+		    " ORDER BY Waste.date_created ASC").params(account_id=current_user.id)
+
+        res = db.engine.execute(stmt)
+  
+        response = []
+        for row in res:
+            response.append({"id": row[0], "name":row[3], "amount":row[4], "price":row[5]})
+
+        return response
  

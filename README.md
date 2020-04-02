@@ -11,6 +11,8 @@ The main features of the app are:
 - add a product to the fridge. A product has a name, amount and a price.
 - list your fridge products
 - modify / delete your products in the fridge
+- throw products to the waste
+- track you food waste
 - make a dish with the products from the fridge. This will update your contents of the fridge.   
 - explore your own dish history or history of all fridge users. 
 
@@ -22,6 +24,6 @@ Password: 12345678
 
 ## Documentation 
 
-[Database diagram](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/Images/MyFridge-Follower.png)
+[Database diagram](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/Images/Vs.1.1 MyFridge-Follower.png)
 
 [User Stories](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/user_stories.md)

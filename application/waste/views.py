@@ -7,7 +7,7 @@ from application.waste.models import Waste
 @app.route("/waste", methods=["GET"])
 @login_required
 def waste_list():
-    return render_template("waste/list.html", waste=Waste.query.all())
+    return render_template("waste/list.html", waste=Waste.find_personal_waste())
 
 @app.route("/waste/delete/<waste_id>/", methods=["GET", "POST"])
 @login_required
