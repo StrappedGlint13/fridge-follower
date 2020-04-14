@@ -24,6 +24,6 @@ Password: 12345678
 
 ## Documentation 
 
-[Database diagram](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/Images/Vs.1.1 MyFridge-Follower.png)
+[Database diagram](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/Images/Vs.1.1%20MyFridge-Follower.png)
 
 [User Stories](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/user_stories.md)
