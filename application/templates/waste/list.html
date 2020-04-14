@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
+  <table class="table table-sm table-dark">
     <tr>
       <th>Product </th>
       <th>Amount (g/ml)</th>
@@ -14,11 +14,10 @@
       <td> {{ waste.price }} </td>
       <td>
 	<form method="POST" action="{{ url_for('delete_permanently', waste_id=waste.id) }}">
-	  <input type="submit" value="Delete permanently"/>
+	  <input type="submit" class="btn btn-warning" value="Delete permanently"/>
 	</form>
       </td>
     </tr>
     {% endfor %}
   </table>
-
 {% endblock %}

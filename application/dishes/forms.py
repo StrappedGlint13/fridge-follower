@@ -1,8 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, FloatField, validators
+from wtforms import StringField, validators, SelectField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
-class HistoryForm(FlaskForm):
-    
- 
+class AddDishForm(FlaskForm):
+
+
     class Meta:
         csrf = False
+

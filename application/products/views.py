@@ -54,7 +54,6 @@ def products_create():
 def products_delete(product_id):
     product = Product.query.get(product_id)
 	
-
     db.session().delete(product)
     db.session().commit()
   

@@ -1,7 +1,23 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <p>
+  <h3>
     Welcome to your Fridge-Follower!
+  </h3>
   </p>
+{% if total_amount_wfood is defined %}
+<h4> Total amount of waste produced: </h4>
+<table class="table">
+    <tr>
+        <th>User</th>
+        <th>Amount of waste food</th>
+      </tr>
+  {% for waste in total_amount_wfood %}
+    <tr>
+       <td>{{ waste.username }}</td> 
+       <td>{{ waste.waste }}</td>  
+     </tr>
+  {% endfor %}
+</table>
+{% endif %}
 {% endblock %}

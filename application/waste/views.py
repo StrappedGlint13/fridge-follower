@@ -18,3 +18,5 @@ def delete_permanently(waste_id):
     db.session().commit()
   
     return redirect(url_for("waste_list"))
+
+

@@ -31,3 +31,4 @@ class Product(Base):
             response.append({"id": row[0], "name":row[3], "amount":row[4], "price":row[5]})
 
         return response
+

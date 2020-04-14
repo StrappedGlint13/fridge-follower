@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{{ error }}
+<form method="POST" action="{{ url_for('user_edit') }}">
+<h2> Edit your account </h2>
+ <br>
+  <table>
+    <tr>
+      <td>
+        {{ form.oldpass.label }}
+      </td>
+      <td>
+        {{ form.oldpass }}
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.newpass.label }}
+      </td>
+      <td>
+        {{ form.newpass }}
+      </td>
+      <td>
+       <ul>
+	 {% for error in form.newpass.errors %}
+	 <li>{{ error }}</li>
+	 {% endfor %}
+       </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.confirmpass.label }}
+      </td>
+      <td>
+        {{ form.confirmpass }}
+      </td>
+      <td>
+       <ul>
+	 {% for error in form.confirmpass.errors %}
+	 <li>{{ error }}</li>
+	 {% endfor %}
+       </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <input type="submit" class="btn btn-info" value="Change your password"/>
+      </td>
+    </tr>
+</form> 
+
+
+{% endblock %}

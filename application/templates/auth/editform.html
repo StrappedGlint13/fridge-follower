@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{{ error }}
+<form method="POST" action="{{ url_for('user_edit') }}">
+<h2> Edit your account </h2>
+ <br>
+  <table>
+    <tr>
+      <td>
+        {{ form.newname.label }}
+      </td>
+      <td>
+        {{ form.newname }}
+      </td>
+      <td>
+       <ul>
+	 {% for error in form.newname.errors %}
+	 <li>{{ error }}</li>
+	 {% endfor %}
+       </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.newusername.label }}
+      </td>
+      <td>
+        {{ form.newusername }}
+      </td>
+      <td>
+       <ul>
+	 {% for error in form.newusername.errors %}
+	 <li>{{ error }}</li>
+	 {% endfor %}
+       </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.newemail.label }}
+      </td>
+      <td>
+        {{ form.newemail }}
+      </td>
+      <td>
+       <ul>
+	 {% for error in form.newemail.errors %}
+	 <li>{{ error }}</li>
+	 {% endfor %}
+       </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <input type="submit" class="btn btn-success" value="Edit"/>
+      </td>
+    </tr>
+    <tr>
+     <td>
+       <a type="submit" class="btn btn-info" href="{{ url_for('change_password', account_id=current_user.id) }}">Change password</a>
+    </td>
+  </tr>
+  <td>
+    <br><br>
+      <form method="POST" action="{{ url_for('user_delete', account_id=current_user.id) }}">
+        <input type="submit" class="btn btn-danger" value="Delete user"/>
+      </form>
+    </td>
+</form> 
+
+
+{% endblock %}

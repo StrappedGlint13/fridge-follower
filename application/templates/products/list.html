@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
+  <table class="table table-sm table-dark">
     <tr>
       <th>Product</th>
       <th>Amount (g/ml)</th>
@@ -26,7 +26,7 @@
       </td>
       <td>
 	<form method="POST" action="{{ url_for('products_delete', product_id=product.id) }}">
-	  <input type="submit" value="Delete product"/>
+	  <input type="submit" class="btn btn-warning" value="Delete product"/>
 	</form>
       </td>
     </tr>

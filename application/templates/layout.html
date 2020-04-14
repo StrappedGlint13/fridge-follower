@@ -8,7 +8,7 @@
     <body>
     
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #e3f2fd;">
-	<a class="navbar-brand" href="#">MyFridge</a>
+	<a class="navbar-brand" href="{{ url_for('index') }}">MyFridge</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
 	</button>
@@ -23,13 +23,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('products_form') }} ">Add a product</a>
             </li>
-            <li class="nav-item">
-	      <a class="nav-link" href="{{ url_for('account_create') }}">New user?</a>
-            </li>
           </ul>
           <div class="form-inline mt-2 mt-md-0">
-
-
+            
+      <a class="nav-link" href="{{ url_for('account_create') }}">New user?</a>
+      <a class="nav-link" href="{{ url_for('user_edit') }}">Edit user</a>
       {% if current_user.is_authenticated %}
       <a href="{{ url_for('auth_logout') }}">MyFridge: {{ current_user.name }} -- Sign out</a>
       {% else %}
@@ -41,8 +39,11 @@
       
    <main role="main" class="container">
     {% block body %}
-    
-    {% endblock %}
+      <p>
+      Content.
+      </p>
+      {% endblock %}
+    </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
