@@ -34,14 +34,15 @@ class Waste(Base):
 
     @staticmethod
     def total_amount_wfood():
-        stmt = text("SELECT Account.username, COUNT(Waste.amount) AS wfood FROM Waste"
+        stmt = text("SELECT Account.username, SUM(Waste.amount) as wfood, SUM(Waste.price) as wprice FROM Waste"
          	        " LEFT JOIN Account ON Waste.account_id = Account.id"
-		            " GROUP BY Account.id")
+		            " GROUP BY Account.id"
+                    " ORDER BY Account.username ASC")
 
         res = db.engine.execute(stmt)
   
         response = []
         for row in res:
-            response.append({"username": row[0], "wfood": row[1]})
+            response.append({"username": row[0], "wfood": row[1], "wprice": row[2]})
 
         return response

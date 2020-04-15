@@ -90,13 +90,14 @@ def change_password():
 
     form = ChangePassForm(request.form)
     
-    if  form.oldpass.data == user.password and form.newpass.data == form.confirmpass.data:
-        user.password = form.newpass.data
+    if  bcrypt.check_password_hash(user.password, form.oldpass.data) and form.newpass.data == form.confirmpass.data:
+        user.password = bcrypt.generate_password_hash(form.newpass.data)
 
         db.session().commit()
-        return redirect(url_for("index"))
+        return redirect(url_for("user_edit"))
     else:
-        return redirect(url_for("change_password", error = "Passwords did not match" ))
+        return render_template("auth/changepassform.html", form = form,
+                                error = "Passwords did not match or the old password was wrong")
 
 @app.route("/auth/delete/<account_id>", methods = ["POST"])
 @login_required

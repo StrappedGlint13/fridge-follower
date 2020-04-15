@@ -1,23 +1,33 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <h3>
+<div class="container">
+  <h2>
     Welcome to your Fridge-Follower!
-  </h3>
+  </h2>
   </p>
 {% if total_amount_wfood is defined %}
 <h4> Total amount of waste produced: </h4>
-<table class="table">
+<table class="table table-striped">
+   <thead class= "thead-dark">
     <tr>
         <th>User</th>
-        <th>Amount of waste food</th>
+        <th>Total amount of wasted food (ml/g)</th>
+        <th>Total wasted money (€)</th>
       </tr>
+   </thead>
+   <tbody>
   {% for waste in total_amount_wfood %}
-    <tr>
+    <tr class="warning">
        <td>{{ waste.username }}</td> 
-       <td>{{ waste.waste }}</td>  
+       <td>{{ waste.wfood }}</td>
+       <td>{{ waste.wprice }}</td>    
      </tr>
   {% endfor %}
 </table>
 {% endif %}
+</div>
+
+</body>
+</html>
 {% endblock %}
