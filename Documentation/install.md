@@ -3,7 +3,7 @@
 ## Download the repository
 `Download or clone` the repository for you from the [main page](https://github.com/StrappedGlint13/fridge-follower)
 
-## Install `python` requirements
+## Install Python requirements
 Install all the Python-project requirements:`pip install -r requirements.txt`. Do this on current virtual environment. In addition, you also need install pip and python. 
 
 ## Install venv
