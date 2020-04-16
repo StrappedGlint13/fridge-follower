@@ -7,7 +7,7 @@ class User(Base):
   
     name = db.Column(db.String(144), nullable=False)
     username = db.Column(db.String(144), nullable=False)
-    password = db.Column(db.String(144), nullable=False)
+    password = db.Column(db.Binary(60), nullable=False)
     email = db.Column(db.String(144), nullable=False)
 
     product_id = db.relationship("Product", backref='account', lazy=True)
