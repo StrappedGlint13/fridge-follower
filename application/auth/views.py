@@ -18,7 +18,12 @@ def auth_login():
     form = LoginForm(request.form)
 
     user = User.query.filter_by(username=form.username.data).first()
-    if not user or not bcrypt.check_password_hash(user.password, form.password.data):
+
+    if not user:
+        return render_template("auth/loginform.html", form = form,
+                                error = "No such username or password")
+
+    if not bcrypt.check_password_hash(user.password, form.password.data):
         return render_template("auth/loginform.html", form = form,
                                 error = "No such username or password")
 
@@ -53,7 +58,6 @@ def account_create():
 @app.route("/auth/edit/", methods = ["GET", "POST"])
 @login_required
 def user_edit():
-    
     user = User.query.get(current_user.id)
 
     if request.method == "GET":
@@ -76,7 +80,6 @@ def user_edit():
     
     db.session().commit()
      
-    flash("Details changed successfully", "info")
     return redirect(url_for("index"))
 
 @app.route("/auth/change/", methods = ["GET", "POST"])
