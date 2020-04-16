@@ -42,7 +42,7 @@ def account_create():
         form.username.errors.append("Username is already in use")
         return render_template("auth/registerform.html", form = form)
 
-    user = User(request.form.get("name"), request.form.get("username"), bcrypt.generate_password_hash(form.password.data), request.form.get("email"))
+    user = User(request.form.get("name"), request.form.get("username"), bcrypt.generate_password_hash(form.password.data).decode('utf-8'), request.form.get("email"))
 
 
     db.session().add(user)
@@ -91,7 +91,7 @@ def change_password():
     form = ChangePassForm(request.form)
     
     if  bcrypt.check_password_hash(user.password, form.oldpass.data) and form.newpass.data == form.confirmpass.data:
-        user.password = bcrypt.generate_password_hash(form.newpass.data)
+        user.password = bcrypt.generate_password_hash(form.newpass.data).decode('utf-8')
 
         db.session().commit()
         return redirect(url_for("user_edit"))
