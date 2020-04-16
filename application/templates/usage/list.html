@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+  <table class="table table-info">
+  <h2>Used food</h2>
+    <tr>
+      <th>Product </th>
+      <th>Amount (g/ml)</th>
+      <th>Price (€)</th>
+    </tr>
+    {% for dishes in dishes %}
+    <tr>
+      <td> {{ dishes.name }} </td>
+      <td> {{ dishes.amount }} </td>
+      <td> {{ dishes.price }} </td>
+    {% endfor %}
+  </table>
+   <table class="table table-warning">
+  	<h2>Wasted food</h2>
+    <tr>
+      <th>Product </th>
+      <th>Amount (g/ml)</th>
+      <th>Price (€)</th>
+    </tr>
+    {% for waste in waste %}
+    <tr>
+      <td> {{ waste.name }} </td>
+      <td> {{ waste.amount }} </td>
+      <td> {{ waste.price }} </td>
+      <td>
+	<form method="POST" action="{{ url_for('delete_permanently', waste_id=waste.id) }}">
+	  <input type="submit" class="btn btn-danger" value="Delete permanently"/>
+	</form>
+      </td>
+    </tr>
+    {% endfor %}
+{% endblock %}

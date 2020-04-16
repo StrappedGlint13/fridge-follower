@@ -4,7 +4,7 @@ from flask import redirect, render_template, request, url_for
 from application import app, db
 from application.products.models import Product
 from application.products.forms import ProductForm
-from application.waste.models import Waste
+from application.usage.models import Waste, Dish
 
 @app.route("/products", methods=["GET"])
 @login_required
@@ -15,20 +15,6 @@ def products_list():
 @login_required
 def products_form():
     return render_template("products/new.html", form = ProductForm())
-
-@app.route("/products/amountchange/<product_id>", methods=["POST","GET"])
-@login_required
-def change_amount(product_id):
-
-    t = Product.query.get(product_id)
-    t.amount = request.form.get("amount")
-    
-    if float(t.amount) < 0:
-         return redirect(url_for("products_list"))
-
-    db.session().commit()
-  
-    return redirect(url_for("products_list"))
 
 
 @app.route("/products/", methods=["POST"])
@@ -72,6 +58,7 @@ def throw_waste(product_id):
          return redirect(url_for("products_list"))
 
     lost_money = (throwaway/t.amount)*t.price
+    t.price = t.price - lost_money
 
     t.amount = t.amount - float(request.form.get("waste")) 
 
@@ -83,6 +70,32 @@ def throw_waste(product_id):
     waste.account_id = current_user.id	
 
     db.session().add(waste)
+    db.session().commit()
+  
+    return redirect(url_for("products_list"))
+
+@app.route("/products/eatsimple/<product_id>", methods=["POST","GET"])
+@login_required
+def eat_simple(product_id):
+
+    t = Product.query.get(product_id)
+    eat = float(request.form.get("amount"))
+    
+    if eat > t.amount:
+         return redirect(url_for("products_list"))
+
+    lost_money = (eat/t.amount)*t.price
+    t.price = t.price - lost_money
+    t.amount = t.amount - float(request.form.get("amount")) 
+
+    if (t.amount == 0):
+         products_delete(product_id)
+
+    dish = Dish(t.name, request.form.get("amount"), lost_money) 
+
+    dish.account_id = current_user.id  
+
+    db.session().add(dish)
     db.session().commit()
   
     return redirect(url_for("products_list"))

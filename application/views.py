@@ -1,6 +1,6 @@
 from flask import render_template
 from application import app
-from application.waste.models import Waste
+from application.usage.models import Waste
 
 @app.route("/")
 def index():

@@ -22,7 +22,7 @@ class Product(Base):
         stmt = text("SELECT * FROM Product"
                     " JOIN Account ON Product.account_id = Account.id"
                     " WHERE Product.account_id = :account_id"
-		    " ORDER BY Product.price ASC").params(account_id=current_user.id)
+		    " ORDER BY Product.name ASC").params(account_id=current_user.id)
 
         res = db.engine.execute(stmt)
   

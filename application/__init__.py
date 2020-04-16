@@ -37,11 +37,8 @@ from application.products import views
 from application.auth import models
 from application.auth import views
 
-from application.dishes import models
-from application.dishes import views
-
-from application.waste import models
-from application.waste import views
+from application.usage import models
+from application.usage import views
 
 from application.auth.models import User
 
