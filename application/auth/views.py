@@ -107,9 +107,9 @@ def change_password():
 @login_required
 def user_delete(account_id):
 
+    user = User.query.get(account_id)
 
-    User.query.filter_by(id=account_id).delete()
-
+    db.session().delete(user)
     db.session().commit()
     
     return redirect(url_for("auth_logout"))

@@ -1,7 +1,9 @@
 from application import db
 from application.models import Base
+from application.auth.models import User
 from flask_login import current_user
 from sqlalchemy.sql import text
+
 
 class Product(Base):
 
@@ -46,4 +48,3 @@ class Product(Base):
             response.append({"total_products": row[0]})
 
         return response
-

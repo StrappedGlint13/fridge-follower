@@ -3,6 +3,9 @@ from application.models import Base
 from flask_login import current_user
 from sqlalchemy.sql import text
 
+favorites = db.Table("favorites", db.Column("dish_id", db.Integer, db.ForeignKey("dish.id"), primary_key=True), db.Column("account_id", db.Integer, db.ForeignKey("account.id"), primary_key=True)
+)
+
 class Waste(Base):
 
     name = db.Column(db.String(144), nullable=False)
@@ -57,6 +60,8 @@ class Dish(Base):
 
     account_id = db.Column(db.Integer, db.ForeignKey('account.id', ondelete='CASCADE'),
                            nullable=False)
+
+    favorites = db.relationship('User', secondary=favorites, lazy='subquery', backref= db.backref('products', lazy= True))
 
     def __init__(self, name, amount, price):
         self.name = name

@@ -52,26 +52,29 @@ def throw_waste(product_id):
 
     t = Product.query.get(product_id)
 
-    throw = float(request.form.get("waste"))
+    if (is_number(request.form.get("waste")) == True):
 
-    if throw > t.amount or throw < 0:
+        throw = float(request.form.get("waste"))
+
+        if throw > t.amount or throw < 0:
+            return redirect(url_for("products_list"))
+
+        lost_money = (throw/t.amount)*t.price
+        t.price = t.price - lost_money
+
+        t.amount = t.amount - float(request.form.get("waste")) 
+
+        if (t.amount == 0):
+            products_delete(product_id)
+
+        waste = Waste(t.name, request.form.get("waste"), lost_money) 
+
+        waste.account_id = current_user.id	
+
+        db.session().add(waste)
+        db.session().commit()
+      
         return redirect(url_for("products_list"))
-
-    lost_money = (throw/t.amount)*t.price
-    t.price = t.price - lost_money
-
-    t.amount = t.amount - float(request.form.get("waste")) 
-
-    if (t.amount == 0):
-        products_delete(product_id)
-
-    waste = Waste(t.name, request.form.get("waste"), lost_money) 
-
-    waste.account_id = current_user.id	
-
-    db.session().add(waste)
-    db.session().commit()
-  
     return redirect(url_for("products_list"))
 
 @app.route("/products/eatsimple/<product_id>", methods=["POST","GET"])
@@ -110,3 +113,5 @@ def is_number(s):
         return True
     except ValueError:
         return False
+
+
