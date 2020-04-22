@@ -4,6 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from application import app, db, bcrypt
 from application.auth.models import User
 from application.products.models import Product
+from application.usage.models import Waste, Dish
 from application.auth.forms import LoginForm
 from application.auth.forms import RegisterForm
 from application.auth.forms import EditForm
@@ -111,7 +112,18 @@ def user_delete(account_id):
     for product in products:
         Product.products_delete(product_id=product.get('product_id'))
 
-    User.query.filter_by(account_id=account_id).delete()
+    wastes = Waste.find_personal_waste()
+
+    for waste in wastes:
+        Waste.delete_permanently(waste_id=waste.get('waste_id'))
+
+    dishes = Dish.find_personal_dishes()
+
+    for dish in dishes:
+        Dish.delete_dish_permanently(dish_id=dish.get('dish_id'))
+
+
+    User.query.filter_by(id=account_id).delete()
 
     db.session().commit()
     

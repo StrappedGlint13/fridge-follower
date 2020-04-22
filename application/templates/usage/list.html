@@ -18,7 +18,7 @@
       <td> {{ dishes.date_created }}
      <td>
   <form method="POST" action="{{ url_for('delete_dish_permanently', dish_id=dishes.id) }}">
-    <input type="submit" class="btn btn-danger" value="Delete permanently"/>
+    <input type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This will affect to your data in the main page')" value="Delete permanently"/>
   </form>
       </td>
       {% endfor %}
@@ -39,7 +39,7 @@
       <td> {{ waste.date_created }}
       <td>
 	<form method="POST" action="{{ url_for('delete_permanently', waste_id=waste.id) }}">
-	  <input type="submit" class="btn btn-danger" value="Delete permanently"/>
+	  <input type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This will affect to your data in the main page')" value="Delete permanently"/>
 	</form>
       </td>
     </tr>

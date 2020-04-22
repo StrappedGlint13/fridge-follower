@@ -79,23 +79,34 @@ def throw_waste(product_id):
 def eat_simple(product_id):
 
     t = Product.query.get(product_id)
-    eat = float(request.form.get("amount"))
+
+    if (is_number(request.form.get("amount")) == True):
+
+        eat = float(request.form.get("amount"))
     
-    if eat > t.amount or eat < 0:
+        if eat > t.amount or eat < 0:
          return redirect(url_for("products_list"))
 
-    cost = (eat/t.amount)*t.price
-    t.price = t.price - cost
-    t.amount = t.amount - float(request.form.get("amount")) 
+        cost = (eat/t.amount)*t.price
+        t.price = t.price - cost
+        t.amount = t.amount - float(request.form.get("amount")) 
 
-    if (t.amount == 0):
+        if (t.amount == 0):
          products_delete(product_id)
 
-    dish = Dish(t.name, request.form.get("amount"), cost) 
+        dish = Dish(t.name, request.form.get("amount"), cost) 
 
-    dish.account_id = current_user.id  
+        dish.account_id = current_user.id  
 
-    db.session().add(dish)
-    db.session().commit()
+        db.session().add(dish)
+        db.session().commit()
   
+        return redirect(url_for("products_list"))
     return redirect(url_for("products_list"))
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False

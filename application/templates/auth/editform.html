@@ -56,6 +56,7 @@
         <input type="submit" class="btn btn-success" value="Edit"/>
       </td>
     </tr>
+    </form>
     <tr>
      <td>
        <a type="submit" class="btn btn-info" href="{{ url_for('change_password', account_id=current_user.id) }}">Change password</a>
@@ -67,7 +68,6 @@
         <input type="submit" class="btn btn-danger" value="Delete user"/>
       </form>
     </td>
-</form> 
 
 
 {% endblock %}
