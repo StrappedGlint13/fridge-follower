@@ -106,21 +106,6 @@ def change_password():
 @app.route("/auth/delete/<account_id>", methods = ["POST", "GET"])
 @login_required
 def user_delete(account_id):
-    
-    products = Product.find_users_products()
-
-    for product in products:
-        Product.products_delete(product_id=product.get('product_id'))
-
-    wastes = Waste.find_personal_waste()
-
-    for waste in wastes:
-        Waste.delete_permanently(waste_id=waste.get('waste_id'))
-
-    dishes = Dish.find_personal_dishes()
-
-    for dish in dishes:
-        Dish.delete_dish_permanently(dish_id=dish.get('dish_id'))
 
 
     User.query.filter_by(id=account_id).delete()

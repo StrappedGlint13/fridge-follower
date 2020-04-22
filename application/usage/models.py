@@ -9,7 +9,7 @@ class Waste(Base):
     amount = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
 
-    account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id', ondelete='CASCADE'),
                            nullable=False)
 
     def __init__(self, name, amount, price):
@@ -55,7 +55,7 @@ class Dish(Base):
     amount = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
 
-    account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id', ondelete='CASCADE'),
                            nullable=False)
 
     def __init__(self, name, amount, price):

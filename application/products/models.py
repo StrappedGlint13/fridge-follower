@@ -9,7 +9,7 @@ class Product(Base):
     amount = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
 
-    account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id', ondelete='CASCADE'),
                            nullable=False)
 
     def __init__(self, name, amount, price):
@@ -29,6 +29,21 @@ class Product(Base):
         response = []
         for row in res:
             response.append({"id": row[0], "name":row[3], "amount":row[4], "price":row[5]})
+
+        return response
+
+    @staticmethod
+    def count_products():
+        stmt = text("SELECT COUNT(*) as total_products FROM Product"
+                    " JOIN Account ON Product.account_id = Account.id"
+                    " WHERE Product.account_id = :account_id"
+            " ORDER BY Product.name ASC").params(account_id=current_user.id)
+
+        res = db.engine.execute(stmt)
+  
+        response = []
+        for row in res:
+            response.append({"total_products": row[0]})
 
         return response
 
