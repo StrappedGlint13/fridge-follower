@@ -17,5 +17,15 @@ def delete_permanently(waste_id):
     db.session().delete(waste)
     db.session().commit()
   
-    return redirect(url_for("waste_list"))
+    return redirect(url_for("usage_list"))
+
+@app.route("/usage/deletedish/<dish_id>/", methods=["GET", "POST"])
+@login_required
+def delete_dish_permanently(dish_id):
+    dish = Dish.query.get(dish_id)
+	
+    db.session().delete(dish)
+    db.session().commit()
+  
+    return redirect(url_for("usage_list"))
 

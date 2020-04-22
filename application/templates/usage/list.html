@@ -8,13 +8,20 @@
       <th>Product </th>
       <th>Amount (g/ml)</th>
       <th>Price (€)</th>
+      <th>Date </th>
     </tr>
     {% for dishes in dishes %}
     <tr>
       <td> {{ dishes.name }} </td>
       <td> {{ dishes.amount }} </td>
       <td> {{ dishes.price }} </td>
-    {% endfor %}
+      <td> {{ dishes.date_created }}
+     <td>
+  <form method="POST" action="{{ url_for('delete_dish_permanently', dish_id=dishes.id) }}">
+    <input type="submit" class="btn btn-danger" value="Delete permanently"/>
+  </form>
+      </td>
+      {% endfor %}
   </table>
    <table class="table table-warning">
   	<h2>Wasted food</h2>
@@ -22,12 +29,14 @@
       <th>Product </th>
       <th>Amount (g/ml)</th>
       <th>Price (€)</th>
+      <th>Date </th>
     </tr>
     {% for waste in waste %}
     <tr>
       <td> {{ waste.name }} </td>
       <td> {{ waste.amount }} </td>
       <td> {{ waste.price }} </td>
+      <td> {{ waste.date_created }}
       <td>
 	<form method="POST" action="{{ url_for('delete_permanently', waste_id=waste.id) }}">
 	  <input type="submit" class="btn btn-danger" value="Delete permanently"/>

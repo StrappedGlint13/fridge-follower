@@ -102,14 +102,17 @@ def change_password():
         return render_template("auth/changepassform.html", form = form,
                                 error = "Passwords did not match or the old password was wrong")
 
-@app.route("/auth/delete/<account_id>", methods = ["POST"])
+@app.route("/auth/delete/<account_id>", methods = ["POST", "GET"])
 @login_required
 def user_delete(account_id):
     
-    Product.query.filter_by(account_id=account_id).delete()
-    user = User.query.get(account_id)
+    products = Product.find_users_products()
 
-    db.session().delete(user)
+    for product in products:
+        Product.products_delete(product_id=product.get('product_id'))
+
+    User.query.filter_by(account_id=account_id).delete()
+
     db.session().commit()
     
     return redirect(url_for("auth_logout"))

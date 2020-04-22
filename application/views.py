@@ -4,4 +4,4 @@ from application.usage.models import Waste
 
 @app.route("/")
 def index():
-    return render_template("index.html", total_amount_wfood=Waste.total_amount_wfood())
+    return render_template("index.html", total_data=Waste.total_data())

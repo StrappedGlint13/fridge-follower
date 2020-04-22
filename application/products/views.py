@@ -51,19 +51,19 @@ def products_delete(product_id):
 def throw_waste(product_id):
 
     t = Product.query.get(product_id)
-     
-    throwaway = float(request.form.get("waste"))
 
-    if throwaway > t.amount:
-         return redirect(url_for("products_list"))
+    throw = float(request.form.get("waste"))
 
-    lost_money = (throwaway/t.amount)*t.price
+    if throw > t.amount or throw < 0:
+        return redirect(url_for("products_list"))
+
+    lost_money = (throw/t.amount)*t.price
     t.price = t.price - lost_money
 
     t.amount = t.amount - float(request.form.get("waste")) 
 
     if (t.amount == 0):
-         products_delete(product_id)
+        products_delete(product_id)
 
     waste = Waste(t.name, request.form.get("waste"), lost_money) 
 
@@ -81,17 +81,17 @@ def eat_simple(product_id):
     t = Product.query.get(product_id)
     eat = float(request.form.get("amount"))
     
-    if eat > t.amount:
+    if eat > t.amount or eat < 0:
          return redirect(url_for("products_list"))
 
-    lost_money = (eat/t.amount)*t.price
-    t.price = t.price - lost_money
+    cost = (eat/t.amount)*t.price
+    t.price = t.price - cost
     t.amount = t.amount - float(request.form.get("amount")) 
 
     if (t.amount == 0):
          products_delete(product_id)
 
-    dish = Dish(t.name, request.form.get("amount"), lost_money) 
+    dish = Dish(t.name, request.form.get("amount"), cost) 
 
     dish.account_id = current_user.id  
 

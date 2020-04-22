@@ -6,7 +6,7 @@
     Welcome to your Fridge-Follower!
   </h2>
   </p>
-{% if total_amount_wfood is defined %}
+{% if total_data is defined %}
 <h4> Total amount of waste produced: </h4>
 <table class="table table-striped">
    <thead class= "thead-dark">
@@ -14,14 +14,16 @@
         <th>User</th>
         <th>Total amount of wasted food (ml/g)</th>
         <th>Total wasted money (€)</th>
+        <th>Usage-%</th>
       </tr>
    </thead>
    <tbody>
-  {% for waste in total_amount_wfood %}
+  {% for data in total_data %}
     <tr class="warning">
-       <td>{{ waste.username }}</td> 
-       <td>{{ waste.wfood }}</td>
-       <td>{{ waste.wprice }}</td>    
+       <td>{{ data.username }}</td> 
+       <td>{{ data.wfood }}</td>
+       <td>{{ data.wprice }}</td> 
+       <td>{{ data.usage }}</td>     
      </tr>
   {% endfor %}
 </table>
