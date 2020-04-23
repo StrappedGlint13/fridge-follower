@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+  <table class="table table-striped">
+  <h2>Favorite foods</h2>
+    <tr>
+      <th>Name</th>
+    </tr>
+    {% for favorite in favorites %}
+    <tr>
+      <td> {{ favorite.name }} </td>
+    </tr>
+    {% endfor %}
+{% endblock %}

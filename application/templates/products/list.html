@@ -1,6 +1,17 @@
 {% extends "layout.html" %}
 
+
 {% block body %}
+{% for item in items %}
+  <table class="table table-sm table-dark">
+    <tr>
+      <th>Total items in the fridge</th>
+    </tr>
+    <tr>
+      <td> {{ item.total_products }} </td>
+      <td>
+    </tr>
+    {% endfor %}
   <table class="table table-sm table-dark">
     <tr>
       <th>Product</th>

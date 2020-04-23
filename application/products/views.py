@@ -9,7 +9,7 @@ from application.usage.models import Waste, Dish
 @app.route("/products", methods=["GET"])
 @login_required
 def products_list():
-    return render_template("products/list.html", products=Product.find_users_products())
+    return render_template("products/list.html", products=Product.find_users_products(), items=Product.count_products())
 
 @app.route("/products/new/")
 @login_required

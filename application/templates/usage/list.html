@@ -16,15 +16,15 @@
       <td> {{ dishes.amount }} </td>
       <td> {{ dishes.price }} </td>
       <td> {{ dishes.date_created }} </td>
-    </tr>
+    
       <td>
-  <form method="POST" action="{{ url_for('add_favorite', dish_id=dish.id) }}">
+  <form method="POST" action="{{ url_for('add_favorite', dish_id=dishes.id) }}">
     <input type="submit" class="btn btn-success" value="Add favorites"/>
   </form>
       </td>
      <td>
   <form method="POST" action="{{ url_for('delete_dish_permanently', dish_id=dishes.id) }}">
-    <input type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This will affect to your data in the main page')" value="Delete permanently"/>
+    <input type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This will affect to your data in the main page and might remove the dish from favorites')" value="Delete permanently"/>
   </form>
     </td>
       {% endfor %}

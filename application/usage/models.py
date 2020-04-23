@@ -3,7 +3,7 @@ from application.models import Base
 from flask_login import current_user
 from sqlalchemy.sql import text
 
-favorites = db.Table("favorites", db.Column("dish_id", db.Integer, db.ForeignKey("dish.id"), primary_key=True), db.Column("account_id", db.Integer, db.ForeignKey("account.id"), primary_key=True)
+favorites = db.Table("favorites", db.Column("dish_id", db.Integer, db.ForeignKey("dish.id"), unique=True), db.Column("account_id", db.Integer, db.ForeignKey("account.id"), unique=True)
 )
 
 class Waste(Base):
@@ -61,7 +61,7 @@ class Dish(Base):
     account_id = db.Column(db.Integer, db.ForeignKey('account.id', ondelete='CASCADE'),
                            nullable=False)
 
-    favorites = db.relationship('User', secondary=favorites, lazy='subquery', backref= db.backref('products', lazy= True))
+    favorites = db.relationship('User', secondary=favorites, lazy='subquery', backref= db.backref('dishes', lazy= True))
 
     def __init__(self, name, amount, price):
         self.name = name
@@ -82,6 +82,39 @@ class Dish(Base):
             response.append({"id":row[0], "name":row[1], "amount":row[2], "price":row[3], "date_created":row[4]})
 
         return response
+
+    @staticmethod
+    def find_favorites():
+        stmt = text("SELECT DISTINCT Dish.name, Account.id FROM Dish"
+                    " LEFT JOIN favorites ON favorites.dish_id = Dish.id"
+                    " LEFT JOIN Account ON Dish.account_id = Account.id"
+                    " WHERE Dish.account_id = :account_id"
+            " ORDER BY Dish.name ASC").params(account_id=current_user.id)
+
+        res = db.engine.execute(stmt)
+  
+        response = []
+        for row in res:
+            response.append({"name":row[0], "id":row[1]})
+
+        return response
+
+    @staticmethod
+    def get_count(name):
+        stmt = text("SELECT Count(*) as total FROM Dish"
+                    " LEFT JOIN favorites ON favorites.dish_id = Dish.id"
+                    " LEFT JOIN Account ON Dish.account_id = Account.id"
+                    " WHERE Dish.account_id = :account_id AND Dish.name = :name"
+                    " ORDER BY Dish.name ASC").params(account_id=current_user.id, name=name)
+
+        res = db.engine.execute(stmt)
+  
+        response = []
+        for row in res:
+            response.append({"name":row[0], "total":row[0]})
+
+        return response
+
  
 
 

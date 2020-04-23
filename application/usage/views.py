@@ -7,35 +7,41 @@ from application.usage.models import Waste, Dish, favorites
 @app.route("/usage", methods=["GET"])
 @login_required
 def usage_list():
-    return render_template("usage/list.html", waste=Waste.find_personal_waste(), dishes=Dish.find_personal_dishes())
+	return render_template("usage/list.html", waste=Waste.find_personal_waste(), dishes=Dish.find_personal_dishes())
 
 @app.route("/usage/deletewaste/<waste_id>/", methods=["GET", "POST"])
 @login_required
 def delete_permanently(waste_id):
-    waste = Waste.query.get(waste_id)
+	waste = Waste.query.get(waste_id)
 	
-    db.session().delete(waste)
-    db.session().commit()
+	db.session().delete(waste)
+	db.session().commit()
   
-    return redirect(url_for("usage_list"))
+	return redirect(url_for("usage_list"))
 
 @app.route("/usage/deletedish/<dish_id>/", methods=["GET", "POST"])
 @login_required
 def delete_dish_permanently(dish_id):
-    dish = Dish.query.get(dish_id)
+	dish = Dish.query.get(dish_id)
 	
-    db.session().delete(dish)
-    db.session().commit()
+	db.session().delete(dish)
+	db.session().commit()
   
-    return redirect(url_for("usage_list"))
+	return redirect(url_for("usage_list"))
 
-@app.route("/usage/addfavorite/<dish_id>", methods=["POST","GET"])
+@app.route("/usage/addfavorite/<dish_id>/", methods=["POST","GET"])
 @login_required
 def add_favorite(dish_id):
 
-    stmt = favorites.insert().values(dish_id=dish_id, account_id=current_user.id)
-    db.session().execute(stmt)
-    db.session().commit()
+	stmt = favorites.insert().values(dish_id=dish_id, account_id=current_user.id)
+	db.session().execute(stmt)
+	db.session().commit()
+	return redirect(url_for("usage_list"))
 
-    return redirect(url_for("usage_list"))
+@app.route("/usage/showfavorites/", methods=["GET"])
+@login_required
+def show_favorites():
+	return render_template("usage/favorites.html", favorites=Dish.find_favorites())
+
+	return redirect(url_for("usage_list"))
 

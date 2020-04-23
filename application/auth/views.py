@@ -114,3 +114,5 @@ def user_delete(account_id):
     
     return redirect(url_for("auth_logout"))
 
+
+
