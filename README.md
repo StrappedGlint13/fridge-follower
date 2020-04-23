@@ -10,11 +10,12 @@ The main features of the app are:
 - login/logout
 - add a product to the fridge. A product has a name, amount and a price.
 - list your fridge products
-- modify / delete your products in the fridge
+- delete your products in the fridge
 - throw products to the waste
-- track you food waste
-- make a dish with the products from the fridge. This will update your contents of the fridge.   
-- explore your own dish history or history of all fridge users. 
+- eat products form the fridge
+- track you food consumption
+- add dishes to the favorites   
+- explore your consumption among all MyFridge users. 
 
 [Here](https://my-fridge-follower.herokuapp.com/) you can start tracking your fridge. Before making a new user, you are able to test the application  with following test IDs:
 
@@ -24,10 +25,12 @@ Password: 12345678
 
 ## Documentation 
 
-[Database diagram](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/Images/Vs.1.1%20MyFridge-Follower.png)
+[Database diagram](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/Images/MyFridgeFinal.png)
 
 [User Stories](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/user_stories.md)
 
 [Manual](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/manual.md)
 
 [Installation instructions](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/install.md)
+
+[Missing features / next steps](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/nextsteps.md)

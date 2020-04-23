@@ -14,7 +14,7 @@ When you have signed in, you will see your name on the right of the top panel as
 
 This scene will need you to sign in first. Then you are able to made some changes to your account:
 
-<img src="https://github.com/StrappedGlint13/ot-harjoitustyo/blob/master/Dokumentaatio/kuvat/Calculator.png" width="600">
+<img src="https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/Images/Edit_account.png" width="600">
 
 On the main view, you will see your name, Fridge name and email. These you able to edit directly on the form and saving the changes by clicking _Edit_-button. 
 
