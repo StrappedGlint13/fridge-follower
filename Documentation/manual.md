@@ -1,16 +1,16 @@
 # Manual
 
-## New user?
+### New user?
 
 To register a new user click _"New user?"_-button on the right top corner. Then fill the fields starting with your own name, followed by your fridge name that is used when signing in. These both fields must be at least 2 characters long. In addition, email-field has the same condition. In the password field, you must type 8-30 characters. Clicking _"Create a Fridge"_ will generate you a fridge. 
 
-## Sign in
+### Sign in
 
 After making a new user, you are able to sign in to your fridge. For this you will need your "Fridge name" and "Password". Clicking _login_ button will do the magic, if fridge name and password you typed will match.
 
 When you have signed in, you will see your name on the right of the top panel as: _"MyFridge: your name"_
 
-## Edit user
+### Edit user
 
 This scene will need you to sign in first. Then you are able to made some changes to your account:
 
@@ -22,6 +22,19 @@ To change your password, click the _Change password_-button first. After that, y
 
 In the _Edit user_ -scene you are also able to delete permanentaly your account. This will happen, if you click _"Delete user"_ -button. 
 
-## Logout 
+### Logout 
 
 In the top right-hand corner is _Logout_-button. By clicking this you are signed out. Then the main page is displayed in front of you. 
+
+## Main functions when signed in
+
+Here are the main funtcions (located in the top panel) after you have signed in:
+
+	- Add a product
+	- List products
+	- Show your personal food usage
+	- Show favorite foods
+
+### Add a product
+
+Here you are able to add products to the fridge. When clicking _Add a product_ -button, you get a form, where are three field 'product name', 'amount(g/ml' and 'price(€)'. Product name should be at least 2 characters long and the two other fields should have a valid float number (not negative). To confirm your add-operation, click the _"Add a new prodcut"_ -button in below. 
