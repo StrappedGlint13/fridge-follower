@@ -5,14 +5,15 @@
 | x    | register MyFridge | 
 | x    | login/logout |
 | x    | edit your account |
-| X    | add a product to the fridge |
-| X    | list your fridge products |
-| x    | delete your products in the fridge |
+| x    | add a product to the fridge |
+| x    | list your fridge products |
+| x    | delete your products from the fridge |
 | x    | throw your products to the waste from the fridge
 | x    | eat dishes from your fridge
 | x    | explore your consumption
 | x    | add dishes to the favorites
 | x    | check your favorite dishes
+| x    | delete dishes/waste permanently
 | x    | all the users are able to see their consumption from the main page
 
 
@@ -41,6 +42,11 @@ Before making a new user, the application will validate, if the account username
 
 `SELECT * FROM Account WHERE Account.username = ?;` 
 
+### Sign in 
+
+User is able to sign in:
+
+`SELECT * FROM Account WHERE username = ? AND password = ?;`
 
 ## Signing in required:
 
@@ -53,14 +59,46 @@ User is able to add a product to the fridge:
 `INSERT INTO Product (id, date_created, date_modified, name, amount, price, account_id), VALUES (?, ?, ?, ?, ?, ?);`
 
 
-### List products
+### List products fron the fridge
 
 User can list hers/his products in alphabetical order:
 
 `"SELECT * FROM Product"
                     JOIN Account ON Product.account_id = Account.id
-                    WHERE Product.account_id = :account_id
+                    WHERE Product.account_id = ?
 		            ORDER BY Product.name ASC;`
+
+### Delete products from the fridge
+
+User can delete products:
+
+`DELETE FROM Product WHERE product_id = ?;`
+
+### Eat dishes from your fridge
+
+User is able to eat dishes  from the fridge products:
+
+- First the amount of the eaten product should be updated:
+
+`UPDATE Product SET amount = ? WHERE Product_id = ?;`
+
+- Then, new dish can be made with: 
+
+`INSERT INTO Dish (id, date_created, date_modified, name, amount, price, account_id), VALUES (?, ?, ?, ?, ?, ?);`
+
+### Explore your favorite dishes
+
+User can explore favorite dishes in alphabetical order:
+
+`SELECT DISTINCT Dish.name, Account.id FROM Dish
+                    LEFT JOIN favorites ON favorites.dish_id = Dish.id
+                    LEFT JOIN Account ON Dish.account_id = Account.id
+                    WHERE Dish.account_id = ?
+            		ORDER BY Dish.name ASC`
+
+
+
+
 
 
 
