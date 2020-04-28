@@ -3,7 +3,7 @@ from application.models import Base
 from flask_login import current_user
 from sqlalchemy.sql import text
 
-favorites = db.Table("favorites", db.Column("dish_id", db.Integer, db.ForeignKey("dish.id"), unique=True), db.Column("account_id", db.Integer, db.ForeignKey("account.id"), unique=True)
+favorites = db.Table("favorites", db.Column("dish_id", db.Integer, db.ForeignKey("dish.id",  ondelete='CASCADE')), db.Column("account_id", db.Integer, db.ForeignKey("account.id",  ondelete='CASCADE'))
 )
 
 class Waste(Base):
@@ -88,7 +88,7 @@ class Dish(Base):
         stmt = text("SELECT DISTINCT Dish.name, Account.id FROM Dish"
                     " LEFT JOIN favorites ON favorites.dish_id = Dish.id"
                     " LEFT JOIN Account ON Dish.account_id = Account.id"
-                    " WHERE Dish.account_id = :account_id"
+                    " WHERE favorites.account_id = :account_id"
             " ORDER BY Dish.name ASC").params(account_id=current_user.id)
 
         res = db.engine.execute(stmt)

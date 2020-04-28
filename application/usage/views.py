@@ -13,6 +13,9 @@ def usage_list():
 @login_required
 def delete_permanently(waste_id):
 	waste = Waste.query.get(waste_id)
+
+	if not waste.account_id == current_user.id:
+		 return redirect(url_for("usage_list"))
 	
 	db.session().delete(waste)
 	db.session().commit()
@@ -23,6 +26,9 @@ def delete_permanently(waste_id):
 @login_required
 def delete_dish_permanently(dish_id):
 	dish = Dish.query.get(dish_id)
+
+	if not dish.account_id == current_user.id:
+		 return redirect(url_for("usage_list"))
 	
 	db.session().delete(dish)
 	db.session().commit()

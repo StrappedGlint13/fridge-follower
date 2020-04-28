@@ -50,11 +50,10 @@ def account_create():
 
     user = User(request.form.get("name"), request.form.get("username"), bcrypt.generate_password_hash(form.password.data).decode('utf-8'), request.form.get("email"))
 
-
     db.session().add(user)
     db.session().commit()
   
-    return redirect(url_for("index")) 
+    return render_template("auth/loginform.html", form = LoginForm())
 
 @app.route("/auth/edit/", methods = ["GET", "POST"])
 @login_required

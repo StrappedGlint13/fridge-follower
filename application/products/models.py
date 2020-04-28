@@ -39,6 +39,7 @@ class Product(Base):
         stmt = text("SELECT Product.id, COUNT(*) as total_products FROM Product"
                     " JOIN Account ON Product.account_id = Account.id"
                     " WHERE Product.account_id = :account_id"
+                    " GROUP BY Account.id"
             " ORDER BY Product.name ASC").params(account_id=current_user.id)
 
         res = db.engine.execute(stmt)

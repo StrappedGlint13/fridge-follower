@@ -38,3 +38,17 @@ Here are the main funtcions (located in the top panel) after you have signed in:
 ### Add a product
 
 Here you are able to add products to the fridge. When clicking _Add a product_ -button, you get a form, where are three field 'product name', 'amount(g/ml' and 'price(€)'. Product name should be at least 2 characters long and the two other fields should have a valid float number (not negative). To confirm your add-operation, click the _"Add a new prodcut"_ -button in below. 
+
+### List products
+
+By clicking _List products_ from the top panel, there will open a view of your products that you've added to your Fridge. From this view, you are able to decrease amount of a certain product and choose whether you throw the choosen amount to the waste or to the dishes. You are able to type the amount to the field you choose and submitting it will create you a dish or a waste. The recommended type amounts in the fridge are millilitres or grams.   
+
+### Show your personal food usage
+
+Here you are able to check your distribution of waste and dishes. If you've accidently added wrongly your products here, you are able to delete dishes and waste permanently. There will be notice that this will delete dish/waste permanently, and will affect you your data. That's why you should be really carefull, when deleting here!
+
+You are also able to add dishes to the favorites. Then you can check your favorite dishes and compare them with other users.
+
+### Show favorite foods 
+
+

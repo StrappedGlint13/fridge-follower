@@ -29,7 +29,6 @@ def products_create():
 
     product.account_id = current_user.id
 
-
     db.session().add(product)
     db.session().commit()
   
@@ -39,6 +38,9 @@ def products_create():
 @login_required
 def products_delete(product_id):
     product = Product.query.get(product_id)
+
+    if not product.account_id == current_user.id:
+         return redirect(url_for("products_list"))
 	
     db.session().delete(product)
     db.session().commit()

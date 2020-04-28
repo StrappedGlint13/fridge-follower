@@ -94,7 +94,7 @@ User can explore favorite dishes in alphabetical order:
                     LEFT JOIN favorites ON favorites.dish_id = Dish.id
                     LEFT JOIN Account ON Dish.account_id = Account.id
                     WHERE Dish.account_id = ?
-            		ORDER BY Dish.name ASC`
+            		ORDER BY Dish.name ASC`;
 
 
 
