@@ -97,6 +97,8 @@ def change_password():
         user.password = bcrypt.generate_password_hash(form.newpass.data).decode('utf-8')
 
         db.session().commit()
+        
+        flash('Password changed successfully')
         return redirect(url_for("user_edit"))
     else:
         return render_template("auth/changepassform.html", form = form,

@@ -1,5 +1,5 @@
 from flask_login import login_required, current_user
-from flask import redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for, flash
 
 from application import app, db
 from application.usage.models import Waste, Dish, favorites
@@ -38,6 +38,12 @@ def delete_dish_permanently(dish_id):
 @app.route("/usage/addfavorite/<dish_id>/", methods=["POST","GET"])
 @login_required
 def add_favorite(dish_id):
+
+	dish = Dish.query.get(dish_id)
+
+	if  Dish.find_id(dish_id):
+		 flash("This item is already added to favorites")
+		 return (redirect(url_for("usage_list")))
 
 	stmt = favorites.insert().values(dish_id=dish_id, account_id=current_user.id)
 	db.session().execute(stmt)

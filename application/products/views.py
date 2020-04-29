@@ -1,5 +1,5 @@
 from flask_login import login_required, current_user
-from flask import redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for, flash
 
 from application import app, db
 from application.products.models import Product
@@ -59,6 +59,7 @@ def throw_waste(product_id):
         throw = float(request.form.get("waste"))
 
         if throw > t.amount or throw < 0:
+            flash('Enter a valid numeric value for wasted food')
             return redirect(url_for("products_list"))
 
         lost_money = (throw/t.amount)*t.price
@@ -77,6 +78,8 @@ def throw_waste(product_id):
         db.session().commit()
       
         return redirect(url_for("products_list"))
+
+    flash('Enter a valid numeric value for wasted food')
     return redirect(url_for("products_list"))
 
 @app.route("/products/eatsimple/<product_id>", methods=["POST","GET"])
@@ -90,6 +93,7 @@ def eat_simple(product_id):
         eat = float(request.form.get("amount"))
     
         if eat > t.amount or eat < 0:
+         flash('Enter a valid numeric value for used food')
          return redirect(url_for("products_list"))
 
         cost = (eat/t.amount)*t.price
@@ -107,6 +111,8 @@ def eat_simple(product_id):
         db.session().commit()
   
         return redirect(url_for("products_list"))
+
+    flash('Enter a valid numeric value for used food')
     return redirect(url_for("products_list"))
 
 def is_number(s):

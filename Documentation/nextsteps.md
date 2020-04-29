@@ -1,14 +1,16 @@
-#Missing features and next steps
+# Missing features and next steps
 
 ## Missing features
 
 - Original idea was make "dishes" as hole selections of products, but during the project it did not seemed so good idea. 
 
-- All datatables do not have full CRUD-functionalities.
+- All datatables do not have full CRUD-functionalities. Only two datatables have full CRUD-functionality at the moment. 
 
 ## Next steps
 
 - "Shared fridge" - there could be a possibility to combine and share fridges among users. Then there could be different kind of rights to manage "shared" fridges like _read only_ or _give full rights_
+
+- Make SQL-queries to the statistics of wasted money. Maybe some possible budgeting features for dishes and setting targets for avoiding waste food. 
 
 - Amounts of the products: There could be a selection box of fixed amounts, that would make "eating" or "wasting" food easier.
 

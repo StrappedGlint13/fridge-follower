@@ -24,6 +24,9 @@
       <td> {{ product.amount }} </td>
       <td> {{ product.price }} </td>
       <td>
+    {% if error %}
+    <h2 class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
 	<form method="POST" action="{{ url_for('eat_simple', product_id=product.id) }}">
           <input type="text" name="amount"/>
 	  <input type="submit" value="Eat"/>

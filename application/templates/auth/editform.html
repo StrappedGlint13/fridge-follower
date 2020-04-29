@@ -65,7 +65,7 @@
   <td>
     <br><br>
       <form method="POST" action="{{ url_for('user_delete', account_id=current_user.id) }}">
-        <input type="submit" class="btn btn-danger" value="Delete user"/>
+        <input type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This will permanently delete the account.')" value="Delete user"/>
       </form>
     </td>
 

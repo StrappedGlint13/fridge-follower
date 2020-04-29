@@ -51,4 +51,4 @@ You are also able to add dishes to the favorites. Then you can check your favori
 
 ### Show favorite foods 
 
-
+By clicking _Show favorite foods_ from the top panel, you will see your favorite foods that you've added here. 

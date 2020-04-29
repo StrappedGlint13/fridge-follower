@@ -16,7 +16,9 @@
       <td> {{ dishes.amount }} </td>
       <td> {{ dishes.price }} </td>
       <td> {{ dishes.date_created }} </td>
-    
+      {% if info %}
+    <h2 class=info><strong>Info:</strong> {{ info }}
+       {% endif %}
       <td>
   <form method="POST" action="{{ url_for('add_favorite', dish_id=dishes.id) }}">
     <input type="submit" class="btn btn-success" value="Add favorites"/>

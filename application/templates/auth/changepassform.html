@@ -47,6 +47,9 @@
       </td>
     </tr>
     <tr>
+      {% if info %}
+    <h2 class=info><strong>Info:</strong> {{ info }}
+       {% endif %}
       <td colspan="3">
         <input type="submit" class="btn btn-info" value="Change your password"/>
       </td>
