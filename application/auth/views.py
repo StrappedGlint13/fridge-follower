@@ -52,7 +52,7 @@ def account_create():
 
     db.session().add(user)
     db.session().commit()
-  
+    
     return render_template("auth/loginform.html", form = LoginForm())
 
 @app.route("/auth/edit/", methods = ["GET", "POST"])
@@ -79,8 +79,9 @@ def user_edit():
     user.email 	= form.newemail.data 
     
     db.session().commit()
-     
-    return redirect(url_for("index"))
+    
+    flash("Changes saved.") 
+    return redirect(url_for("user_edit"))
 
 @app.route("/auth/change/", methods = ["GET", "POST"])
 @login_required
@@ -97,7 +98,7 @@ def change_password():
         user.password = bcrypt.generate_password_hash(form.newpass.data).decode('utf-8')
 
         db.session().commit()
-        
+
         flash('Password changed successfully')
         return redirect(url_for("user_edit"))
     else:
@@ -113,6 +114,7 @@ def user_delete(account_id):
     db.session().delete(user)
     db.session().commit()
     
+    flash("User deleted successfully.")
     return redirect(url_for("auth_logout"))
 
 

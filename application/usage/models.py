@@ -66,23 +66,6 @@ class Dish(Base):
 
         return response
 
-    @staticmethod
-    def get_count(name):
-        stmt = text("SELECT Count(*) as total FROM Dish"
-                    " LEFT JOIN favorites ON favorites.dish_id = Dish.id"
-                    " LEFT JOIN Account ON Dish.account_id = Account.id"
-                    " WHERE Dish.account_id = :account_id AND Dish.name = :name"
-                    " ORDER BY Dish.name ASC").params(account_id=current_user.id, name=name)
-
-        res = db.engine.execute(stmt)
-  
-        response = []
-        for row in res:
-            response.append({"name":row[0], "total":row[0]})
-
-        return response
-
-
 
 class Waste(Base):
 
@@ -120,7 +103,7 @@ class Waste(Base):
                     " LEFT JOIN Product ON Product.account_id = Account.id"
                     " LEFT JOIN Dish ON Dish.account_id = Account.id"
 		            " GROUP BY Account.id"
-                    " ORDER BY Account.username ASC")
+                    " ORDER BY usage DESC")
 
         res = db.engine.execute(stmt)
   
