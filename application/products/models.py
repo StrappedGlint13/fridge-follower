@@ -36,7 +36,7 @@ class Product(Base):
 
     @staticmethod
     def count_products():
-        stmt = text("SELECT COUNT(*) as total_products FROM Product"
+        stmt = text("SELECT Product.name, COUNT(*) as total_products FROM Product"
                     " JOIN Account ON Product.account_id = Account.id"
                     " WHERE Product.account_id = :account_id"
             " ORDER BY Product.name ASC").params(account_id=current_user.id)
@@ -45,6 +45,6 @@ class Product(Base):
   
         response = []
         for row in res:
-            response.append({"total_products": row[0]})
+            response.append({"name": row[0], "total_products": row[1]})
 
         return response
