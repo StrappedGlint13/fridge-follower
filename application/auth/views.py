@@ -48,7 +48,7 @@ def account_create():
         form.username.errors.append("Username is already in use")
         return render_template("auth/registerform.html", form = form)
 
-    user = User(request.form.get("name"), request.form.get("username"), bcrypt.generate_password_hash(form.password.data).decode('utf-8'), request.form.get("email"))
+    user = User(request.form.get("username"), bcrypt.generate_password_hash(form.password.data).decode('utf-8'), request.form.get("email"))
 
     db.session().add(user)
     db.session().commit()
@@ -63,7 +63,6 @@ def user_edit():
     if request.method == "GET":
         form = EditForm()
 
-        form.newname.data = user.name
         form.newusername.data = user.username
         form.newemail.data = user.email
 
@@ -74,7 +73,6 @@ def user_edit():
     if not form.validate():
         return render_template("auth/editform.html", form = form)
 
-    user.name = form.newname.data
     user.username = form.newusername.data
     user.email 	= form.newemail.data 
     

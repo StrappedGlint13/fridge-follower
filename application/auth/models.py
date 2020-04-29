@@ -5,7 +5,6 @@ class User(Base):
 
     __tablename__ = "account"
   
-    name = db.Column(db.String(144), nullable=False)
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
     email = db.Column(db.String(144), nullable=False)
@@ -15,8 +14,7 @@ class User(Base):
     dish_id = db.relationship("Dish", backref='account', cascade="all, delete", lazy=True)
 
 
-    def __init__(self, name, username, password, email):
-        self.name = name
+    def __init__(self, username, password, email):
         self.username = username
         self.password = password
         self.email = email

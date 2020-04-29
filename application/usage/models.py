@@ -98,7 +98,7 @@ class Waste(Base):
 
     @staticmethod
     def total_data():
-        stmt = text("SELECT Account.username,  SUM(Waste.amount) as wfood, SUM(Waste.price) as wprice, (SUM(Dish.amount) / (SUM(Waste.amount) + SUM(Dish.amount))) as usage FROM Waste"
+        stmt = text("SELECT Account.username, Account.date_created,  SUM(Waste.amount) as wfood, SUM(Waste.price) as wprice, (SUM(Dish.amount) / (SUM(Waste.amount) + SUM(Dish.amount))) as usage FROM Waste"
          	        " LEFT JOIN Account ON Waste.account_id = Account.id"
                     " LEFT JOIN Product ON Product.account_id = Account.id"
                     " LEFT JOIN Dish ON Dish.account_id = Account.id"
@@ -109,7 +109,7 @@ class Waste(Base):
   
         response = []
         for row in res:
-            response.append({"username": row[0], "wfood": row[1], "wprice": row[2], "usage": row[3]})
+            response.append({"username": row[0], "date_created": row[1], "wfood": row[2], "wprice": row[3], "usage": row[4]})
 
         return response
 

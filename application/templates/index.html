@@ -12,7 +12,8 @@
    <thead class= "thead-dark">
     <tr>
         <th>MyFridge</th>
-        <th>Total amount of wasted food (ml/g)</th>
+        <th>Registered</th>
+        <th>Total weight of wasted food (ml/g)</th>
         <th>Total wasted money (€)</th>
         <th>Usage-%</th>
       </tr>
@@ -20,7 +21,8 @@
    <tbody>
   {% for data in total_data %}
     <tr class="warning">
-       <td>{{ data.username }}</td> 
+       <td>{{ data.username }}</td>
+       <td>{{ data.date_created }}</td> 
        <td>{{ data.wfood }}</td>
        <td>{{ data.wprice }}</td> 
        <td>{{ data.usage }}</td>    
