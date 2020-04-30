@@ -1,6 +1,0 @@
- id |        date_created        |       date_modified        | name | username |                           password                           |  email  
-----+----------------------------+----------------------------+------+----------+--------------------------------------------------------------+---------
-  1 | 2020-04-16 18:20:40.278427 | 2020-04-16 18:31:38.959734 | 123  | asds     | $2b$12$IlIiG0kRFGIRKuIrOGFeuuYXxkV/PyZrLjL7EIyNn5jrAZE2XgHTy | asd@asd
-  2 | 2020-04-20 14:19:06.619373 | 2020-04-20 14:19:06.619373 | test | test     | $2b$12$rfun9rd5meBC8HV9wTuayuA3tnYs1/ImOYDuAHGqzhyVtFLBVScXq | test
-(2 rows)
-

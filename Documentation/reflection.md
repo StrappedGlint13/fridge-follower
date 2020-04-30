@@ -6,7 +6,7 @@
 
 - In the usage-folder there are dish and waste -classes as mentioned above. The "favorites"-connection table is also in the usage-folder. Dish and waste could be in a different folders, but I thought that because Dish and Waste -datatables are handling sort of the same area in the database, this might be a logical solution. 
 
-## Normalization and choises about denormalization
+## Normalization and choises for denormalization
 
 - The database is normalized, as it is satisfying the 3 normalization phases. There could be a solution to add a certain dish/waste into one row, only growing its amount and price to make datatable more readable and less data repeting itself. Nevertheless, I chose denormalize the data, as there is more information to user _when_ certain amounts of certain product is eaten. This  make some repetitive data naturally. 
 
