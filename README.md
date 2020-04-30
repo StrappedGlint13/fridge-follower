@@ -34,3 +34,5 @@ Password: 12345678
 [Installation instructions](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/install.md)
 
 [Missing features / next steps](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/nextsteps.md)
+
+[Reflection](https://github.com/StrappedGlint13/fridge-follower/blob/master/Documentation/reflection.md)

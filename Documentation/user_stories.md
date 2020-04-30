@@ -5,19 +5,19 @@
 | x    | register MyFridge | 
 | x    | login/logout |
 | x    | edit your account |
+| x    | delete your account | 
 | x    | add a product to the fridge |
 | x    | list your fridge products |
 | x    | delete your products from the fridge |
 | x    | throw your products to the waste from the fridge
 | x    | eat dishes from your fridge
-| x    | explore your consumption
 | x    | add dishes to the favorites
-| x    | check your favorite dishes
+| x    | explore your favorite dishes
 | x    | delete dishes/waste permanently
 | x    | all the users are able to see their consumption from the main page
 
 
-# User stories SQL-queries
+# SQL-queries fo User stories and CREATE TABLE -statements
 
 ## Signing in not required:
 
@@ -25,12 +25,12 @@
 
 Users will see consumption stats from registered users of the app at the main page:
 
-`SELECT Account.username,  SUM(Waste.amount) as wfood, SUM(Waste.price) as wprice, (SUM(Dish.amount) / (SUM(Waste.amount) + SUM(Dish.amount))) as usage FROM Waste
+`SELECT Account.username, Account.date_created,  SUM(Waste.amount) as wfood, SUM(Waste.price) as wprice, (SUM(Dish.amount) / (SUM(Waste.amount) + SUM(Dish.amount))) as usage FROM Waste
          	        LEFT JOIN Account ON Waste.account_id = Account.id
                     LEFT JOIN Product ON Product.account_id = Account.id
                     LEFT JOIN Dish ON Dish.account_id = Account.id
 		            GROUP BY Account.id
-                    ORDER BY Account.username ASC;`
+                    ORDER BY usage DESC;`
 
 ### Register MyFridge 
 
@@ -56,10 +56,10 @@ These sql-queries need _account_id_, which is defined as _current_user.id_, afte
 
 User is able to add a product to the fridge:
 
-`INSERT INTO Product (id, date_created, date_modified, name, amount, price, account_id), VALUES (?, ?, ?, ?, ?, ?);`
+`INSERT INTO Product (id, date_created, date_modified, name, amount, price, account_id) VALUES (?, ?, ?, ?, ?, ?);`
 
 
-### List products fron the fridge
+### List products from the fridge
 
 User can list hers/his products in alphabetical order:
 
@@ -76,7 +76,7 @@ User can delete products:
 
 ### Eat dishes from your fridge
 
-User is able to eat dishes  from the fridge products:
+User is able to eat dishes from the fridge products:
 
 - First the amount of the eaten product should be updated:
 
@@ -86,6 +86,32 @@ User is able to eat dishes  from the fridge products:
 
 `INSERT INTO Dish (id, date_created, date_modified, name, amount, price, account_id), VALUES (?, ?, ?, ?, ?, ?);`
 
+### Show your consumption of food
+
+User can explore his/her consumption from two tables at this scene:
+
+- Waste: `SELECT Waste.id, Waste.name, Waste.amount, Waste.price, Waste.date_created FROM Waste
+                     JOIN Account ON Waste.account_id = Account.id
+                     WHERE Waste.account_id = ?
+             ORDER BY Waste.date_created DESC`
+
+- Dishes: `Dish.id, Dish.name, Dish.amount, Dish.price, Dish.date_created FROM Dish
+                     JOIN Account ON Dish.account_id = Account.id
+                     WHERE Dish.account_id = :account_id
+             ORDER BY Dish.date_created ASC`
+
+### Add dishes to the favorites
+
+User is able to add dishes to the favorites with _dish_id_ and _account_id_ foreign keys:
+
+`INSERT INTO favorites (dish_id, account_id) VALUES (?, ?);`
+
+Before adding new favorite food, app will check if dish is already added to the database:
+
+`SELECT favorites.dish_id, favorites.account_id FROM favorites"
+                    WHERE favorites.account_id = ? AND favorites.dish_id = ?;`
+
+
 ### Explore your favorite dishes
 
 User can explore favorite dishes in alphabetical order:
@@ -94,7 +120,85 @@ User can explore favorite dishes in alphabetical order:
                     LEFT JOIN favorites ON favorites.dish_id = Dish.id
                     LEFT JOIN Account ON Dish.account_id = Account.id
                     WHERE Dish.account_id = ?
-            		ORDER BY Dish.name ASC`;
+            		ORDER BY Dish.name ASC;`
+
+### Delete your account permanently
+
+User is able to delete his/hers account by clicking _delete user_ - this will delete all data from the database:
+
+`DELETE FROM Account WHERE account_id = ?`
+`DELETE FROM Product WHERE account_id = ?`
+`DELETE FROM Dish WHERE account_id = ?`
+`DELETE FROM Waste WHERE account_id = ?`
+`DELETE FROM favorites WHERE dish_id = ? AND account_id = ?`
+
+## CREATE TABLE -SENTENCES
+
+Location: application/auth
+
+`CREATE TABLE account (
+    id INTEGER NOT NULL, 
+    date_created DATETIME, 
+    date_modified DATETIME, 
+    username VARCHAR(144) NOT NULL, 
+    password VARCHAR(144) NOT NULL, 
+    email VARCHAR(144) NOT NULL, 
+    PRIMARY KEY (id)
+)`
+
+Location: application/usage
+
+`CREATE TABLE dish (
+    id INTEGER NOT NULL, 
+    date_created DATETIME, 
+    date_modified DATETIME, 
+    name VARCHAR(144) NOT NULL, 
+    amount FLOAT NOT NULL, 
+    price FLOAT NOT NULL, 
+    account_id INTEGER NOT NULL, 
+    PRIMARY KEY (id), 
+    FOREIGN KEY(account_id) REFERENCES account (id) ON DELETE CASCADE
+)`
+
+`
+CREATE TABLE waste (
+    id INTEGER NOT NULL, 
+    date_created DATETIME, 
+    date_modified DATETIME, 
+    name VARCHAR(144) NOT NULL, 
+    amount FLOAT NOT NULL, 
+    price FLOAT NOT NULL, 
+    account_id INTEGER NOT NULL, 
+    PRIMARY KEY (id), 
+    FOREIGN KEY(account_id) REFERENCES account (id) ON DELETE CASCADE
+)
+`
+
+`
+CREATE TABLE favorites (
+    dish_id INTEGER, 
+    account_id INTEGER, 
+    FOREIGN KEY(dish_id) REFERENCES dish (id) ON DELETE CASCADE, 
+    FOREIGN KEY(account_id) REFERENCES account (id) ON DELETE CASCADE
+)
+`
+
+Location: application/products
+
+`CREATE TABLE product (
+    id INTEGER NOT NULL, 
+    date_created DATETIME, 
+    date_modified DATETIME, 
+    name VARCHAR(144) NOT NULL, 
+    amount FLOAT NOT NULL, 
+    price FLOAT NOT NULL, 
+    account_id INTEGER NOT NULL, 
+    PRIMARY KEY (id), 
+    FOREIGN KEY(account_id) REFERENCES account (id) ON DELETE CASCADE
+)
+`
+
+
 
 
 
