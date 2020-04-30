@@ -100,8 +100,7 @@ class Waste(Base):
     def total_data():
         stmt = text("SELECT Account.username, Account.date_created,  SUM(Waste.amount) as wfood, SUM(Waste.price) as wprice, (SUM(Dish.amount) / (SUM(Waste.amount) + SUM(Dish.amount))) as usage FROM Waste"
          	        " LEFT JOIN Account ON Waste.account_id = Account.id"
-                    " LEFT JOIN Product ON Product.account_id = Account.id"
-                    " LEFT JOIN Dish ON Dish.account_id = Account.id"
+                    " LEFT JOIN Dish ON Dish.account_id = Dish.id"
 		            " GROUP BY Account.id"
                     " ORDER BY usage DESC")
 
