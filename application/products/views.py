@@ -64,7 +64,6 @@ def throw_waste(product_id):
 
         lost_money = (throw/t.amount)*t.price
         t.price = t.price - lost_money
-
         t.amount = t.amount - float(request.form.get("waste")) 
 
         if (t.amount == 0):
