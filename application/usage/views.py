@@ -41,6 +41,9 @@ def add_favorite(dish_id):
 
 	dish = Dish.query.get(dish_id)
 
+	if not dish.account_id == current_user.id:
+		 return redirect(url_for("usage_list"))
+
 	if  Dish.find_id(dish_id):
 		 flash("This item is already added to favorites")
 		 return (redirect(url_for("usage_list")))
